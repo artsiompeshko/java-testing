@@ -4,6 +4,7 @@ import com.apeshko.testing.template.TagsMatcher;
 import com.apeshko.testing.template.TemplateGenerator;
 import com.apeshko.testing.template.TemplateModel;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
@@ -19,7 +20,6 @@ import static org.mockito.Mockito.when;
 /**
    This is just to show test examples with mocked values
  */
-
 @ExtendWith(MockitoExtension.class)
 class DefaultTemplateGeneratorTestWithMock {
     @Mock
@@ -33,6 +33,7 @@ class DefaultTemplateGeneratorTestWithMock {
     }
 
     @Test
+    @Tag("fast")
     void buildFromString_ShouldReplaceTags() {
         // given
         String inputTemplate = "Test #{tag}";
