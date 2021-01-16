@@ -57,12 +57,14 @@ class DefaultTemplateGeneratorTest {
                 Arguments.of("hello #{name}", "hello Artsiom", new TemplateModel(new HashMap<String, String>() {{
                     put("name", "Artsiom");
                 }})),
+                Arguments.of("hello #{name} #{name}", "hello Artsiom Artsiom", new TemplateModel(new HashMap<String, String>() {{
+                    put("name", "Artsiom");
+                }})),
                 Arguments.of("hello #{name} #{surname}", "hello Artsiom Peshko", new TemplateModel(new HashMap<String, String>() {{
                     put("name", "Artsiom");
                     put("surname", "Peshko");
                 }})),
-                Arguments.of("", "", null),
-                Arguments.of(null, "", null)
+                Arguments.of("", "", null)
         );
     }
 
