@@ -2,12 +2,10 @@ package com.apeshko.testing.template;
 
 public class TemplateDetails {
     private TemplateGenerator templateGenerator;
-    private TemplateValidator templateValidator;
     private String templateContent;
 
-    public TemplateDetails(TemplateGenerator templateGenerator, TemplateValidator templateValidator, String templateContent) {
+    public TemplateDetails(TemplateGenerator templateGenerator, String templateContent) {
         this.templateGenerator = templateGenerator;
-        this.templateValidator = templateValidator;
         this.templateContent = templateContent;
     }
 
@@ -17,14 +15,6 @@ public class TemplateDetails {
 
     public void setTemplateGenerator(TemplateGenerator templateGenerator) {
         this.templateGenerator = templateGenerator;
-    }
-
-    public TemplateValidator getTemplateValidator() {
-        return templateValidator;
-    }
-
-    public void setTemplateValidator(TemplateValidator templateValidator) {
-        this.templateValidator = templateValidator;
     }
 
     public String getTemplateContent() {
