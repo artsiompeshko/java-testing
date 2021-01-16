@@ -6,6 +6,8 @@ import com.apeshko.testing.template.TemplateModel;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.condition.DisabledOnOs;
+import org.junit.jupiter.api.condition.OS;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.mockito.Mockito;
@@ -34,6 +36,7 @@ class DefaultTemplateGeneratorTestWithMock {
 
     @Test
     @Tag("fast")
+    @DisabledOnOs(OS.LINUX)
     void buildFromString_ShouldReplaceTags() {
         // given
         String inputTemplate = "Test #{tag}";
