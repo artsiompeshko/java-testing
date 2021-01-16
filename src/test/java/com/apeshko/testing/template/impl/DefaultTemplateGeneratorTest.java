@@ -3,6 +3,7 @@ package com.apeshko.testing.template.impl;
 import com.apeshko.testing.template.TemplateGenerator;
 import com.apeshko.testing.template.TemplateModel;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
@@ -14,12 +15,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class DefaultTemplateGeneratorTest {
-    private TemplateGenerator templateGenerator;
-
-    @BeforeEach
-    void initEach() {
-        this.templateGenerator = new DefaultTemplateGenerator();
-    }
+    private TemplateGenerator templateGenerator = new DefaultTemplateGenerator(new DefaultTagsMatcher());
 
     @ParameterizedTest
     @MethodSource("provideTemplatesWithTags")
@@ -41,10 +37,19 @@ class DefaultTemplateGeneratorTest {
 
     @ParameterizedTest
     @MethodSource("provideTemplatesWithInvalidArgs")
-    void buildFromString_ShouldThrowsExceptionForInvalidArgs(String inputTemplate, String expectedTemplate, TemplateModel templateModel) {
+    void buildFromString_ShouldThrowsExceptionForInvalidArgs(String inputTemplate, TemplateModel templateModel) {
         assertThrows(IllegalArgumentException.class, () -> {
                 this.templateGenerator.buildFromString(inputTemplate, templateModel);
         });
+    }
+
+    @Test
+    void buildFromString_ShouldThrowsExceptionIfNotEnoughTagsValues() {
+        Exception exception = assertThrows(IllegalArgumentException.class, () -> {
+                this.templateGenerator.buildFromString("test #{tag}", new TemplateModel(new HashMap<>()));
+        });
+
+        assertEquals("Some tag values are missed", exception.getMessage());
     }
 
     private static Stream<Arguments> provideTemplatesWithTags() {
@@ -78,7 +83,7 @@ class DefaultTemplateGeneratorTest {
 
     private static Stream<Arguments> provideTemplatesWithInvalidArgs() {
         return Stream.of(
-                Arguments.of(null, null, null)
+                Arguments.of(null, null)
         );
     }
 }
