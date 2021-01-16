@@ -1,0 +1,4 @@
+Test Successful for test getAllTags_shouldThrowExceptionForWrongArgs()
+Test Successful for test [1] hello #{name} #{surname}, [name, surname]
+Test Successful for test [2] test, []
+Test Successful for test [3] #{test} word #{test}, [test]
