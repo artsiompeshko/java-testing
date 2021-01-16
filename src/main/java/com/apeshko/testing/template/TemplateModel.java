@@ -9,4 +9,8 @@ public class TemplateModel {
     public TemplateModel(Map<String, String> initialTags) {
         this.tags.putAll(initialTags);
     }
+
+    public String getValue(String tag) {
+        return this.tags.get(tag);
+    }
 }
